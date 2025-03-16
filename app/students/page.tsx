@@ -1,0 +1,310 @@
+import Link from "next/link"
+import { Building, CreditCard, FileText, Home, Menu, MessageSquare, Search, Settings, User, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
+export default function StudentsPage() {
+  return (
+    <div className="flex min-h-screen w-full flex-col bg-muted/40">
+      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="shrink-0 md:hidden">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="flex flex-col">
+            <nav className="grid gap-2 text-lg font-medium">
+              <Link
+                href="/"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <Home className="h-5 w-5" />
+                Dashboard
+              </Link>
+              <Link href="/students" className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-primary">
+                <Users className="h-5 w-5" />
+                Students
+              </Link>
+              <Link
+                href="/rooms"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <Building className="h-5 w-5" />
+                Rooms
+              </Link>
+              <Link
+                href="/billing"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <CreditCard className="h-5 w-5" />
+                Billing
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <MessageSquare className="h-5 w-5" />
+                Complaints
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <FileText className="h-5 w-5" />
+                Reports
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <Settings className="h-5 w-5" />
+                Settings
+              </Link>
+            </nav>
+          </SheetContent>
+        </Sheet>
+        <div className="flex items-center gap-2">
+          <Building className="h-6 w-6" />
+          <span className="text-lg font-semibold">Hostel Manager</span>
+        </div>
+        <div className="ml-auto flex items-center gap-4">
+          <Button variant="outline" size="sm" className="hidden md:flex">
+            <User className="mr-2 h-4 w-4" />
+            Profile
+          </Button>
+          <Button size="sm">
+            <Settings className="mr-2 h-4 w-4" />
+            Settings
+          </Button>
+        </div>
+      </header>
+      <div className="flex flex-1">
+        <aside className="hidden w-[250px] flex-col border-r bg-background md:flex">
+          <nav className="grid gap-2 p-4 text-sm">
+            <Link
+              href="/"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <Home className="h-5 w-5" />
+              Dashboard
+            </Link>
+            <Link href="/students" className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-primary">
+              <Users className="h-5 w-5" />
+              Students
+            </Link>
+            <Link
+              href="/rooms"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <Building className="h-5 w-5" />
+              Rooms
+            </Link>
+            <Link
+              href="/billing"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <CreditCard className="h-5 w-5" />
+              Billing
+            </Link>
+            <Link
+              href="/complaints"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <MessageSquare className="h-5 w-5" />
+              Complaints
+            </Link>
+            <Link
+              href="/reports"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <FileText className="h-5 w-5" />
+              Reports
+            </Link>
+            <Link
+              href="/settings"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <Settings className="h-5 w-5" />
+              Settings
+            </Link>
+          </nav>
+        </aside>
+        <main className="flex-1 p-4 md:p-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h1 className="text-2xl font-bold">Students</h1>
+              <p className="text-muted-foreground">Manage student information and room assignments</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search students..."
+                  className="w-full rounded-lg bg-background pl-8 md:w-[300px]"
+                />
+              </div>
+              <Button>Add Student</Button>
+            </div>
+          </div>
+          <Card className="mt-6">
+            <CardHeader className="px-6">
+              <CardTitle>Student Directory</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>ID</TableHead>
+                    <TableHead>Room</TableHead>
+                    <TableHead>Check-in Date</TableHead>
+                    <TableHead>Payment Status</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">John Doe</TableCell>
+                    <TableCell>STU-1001</TableCell>
+                    <TableCell>203</TableCell>
+                    <TableCell>Jan 15, 2025</TableCell>
+                    <TableCell>
+                      <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                        Paid
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            Actions
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Change Room</DropdownMenuItem>
+                          <DropdownMenuItem className="text-destructive">Check Out</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Sarah Johnson</TableCell>
+                    <TableCell>STU-1002</TableCell>
+                    <TableCell>105</TableCell>
+                    <TableCell>Feb 3, 2025</TableCell>
+                    <TableCell>
+                      <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                        Paid
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            Actions
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Change Room</DropdownMenuItem>
+                          <DropdownMenuItem className="text-destructive">Check Out</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Robert Smith</TableCell>
+                    <TableCell>STU-1003</TableCell>
+                    <TableCell>310</TableCell>
+                    <TableCell>Feb 10, 2025</TableCell>
+                    <TableCell>
+                      <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
+                        Pending
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            Actions
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Change Room</DropdownMenuItem>
+                          <DropdownMenuItem className="text-destructive">Check Out</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Emily Davis</TableCell>
+                    <TableCell>STU-1004</TableCell>
+                    <TableCell>207</TableCell>
+                    <TableCell>Jan 5, 2025</TableCell>
+                    <TableCell>
+                      <span className="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">
+                        Overdue
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            Actions
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Change Room</DropdownMenuItem>
+                          <DropdownMenuItem className="text-destructive">Check Out</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Michael Brown</TableCell>
+                    <TableCell>STU-1005</TableCell>
+                    <TableCell>-</TableCell>
+                    <TableCell>Dec 10, 2024</TableCell>
+                    <TableCell>
+                      <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                        Checked Out
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            Actions
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem>Archive</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </main>
+      </div>
+    </div>
+  )
+}
+
