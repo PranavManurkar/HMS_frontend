@@ -71,10 +71,12 @@ export default function Dashboard() {
           <span className="text-lg font-semibold">Hostel Manager</span>
         </div>
         <div className="ml-auto flex items-center gap-4">
-          <Button variant="outline" size="sm" className="hidden md:flex">
-            <User className="mr-2 h-4 w-4" />
-            Profile
-          </Button>
+          <Link href="/profile">
+            <Button variant="outline" size="sm" className="hidden md:flex">
+              <User className="mr-2 h-4 w-4" />
+              Profile
+            </Button>
+          </Link>
           <Button size="sm">
             <Settings className="mr-2 h-4 w-4" />
             Settings
