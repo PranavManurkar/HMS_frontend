@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
+import RoomTabs from "./getRoomsData"
 
 export default function RoomsPage() {
   return (
@@ -154,7 +155,7 @@ export default function RoomsPage() {
             </div>
           </div>
 
-          <Tabs defaultValue="all" className="mt-6">
+          {/* <Tabs defaultValue="all" className="mt-6">
             <TabsList>
               <TabsTrigger value="all">All Rooms</TabsTrigger>
               <TabsTrigger value="occupied">Occupied</TabsTrigger>
@@ -207,7 +208,8 @@ export default function RoomsPage() {
                 />
               </div>
             </TabsContent>
-          </Tabs>
+          </Tabs> */}
+          <RoomTabs />
         </main>
       </div>
     </div>

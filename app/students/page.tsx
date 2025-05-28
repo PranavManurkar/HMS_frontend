@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import StudentTable from "./getStudentData"
 
 export default function StudentsPage() {
   return (
@@ -158,7 +159,7 @@ export default function StudentsPage() {
               <CardTitle>Student Directory</CardTitle>
             </CardHeader>
             <CardContent>
-              <Table>
+              {/* <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
@@ -299,7 +300,8 @@ export default function StudentsPage() {
                     </TableCell>
                   </TableRow>
                 </TableBody>
-              </Table>
+              </Table> */}
+              <StudentTable />
             </CardContent>
           </Card>
         </main>
