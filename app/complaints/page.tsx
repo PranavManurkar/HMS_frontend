@@ -25,6 +25,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import ComplaintsTable from "./getComplaintsData"
 
 export default function ComplaintsPage() {
   return (
@@ -247,7 +248,7 @@ export default function ComplaintsPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableRow>
+                      {/* <TableRow>
                         <TableCell className="font-medium">C-1001</TableCell>
                         <TableCell>John Doe</TableCell>
                         <TableCell>203</TableCell>
@@ -277,8 +278,8 @@ export default function ComplaintsPage() {
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>
-                      </TableRow>
-                      <TableRow>
+                      </TableRow> */}
+                      {/* <TableRow>
                         <TableCell className="font-medium">C-1002</TableCell>
                         <TableCell>Sarah Johnson</TableCell>
                         <TableCell>105</TableCell>
@@ -307,8 +308,8 @@ export default function ComplaintsPage() {
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>
-                      </TableRow>
-                      <TableRow>
+                      </TableRow> */}
+                      {/* <TableRow>
                         <TableCell className="font-medium">C-1003</TableCell>
                         <TableCell>Robert Smith</TableCell>
                         <TableCell>310</TableCell>
@@ -338,8 +339,8 @@ export default function ComplaintsPage() {
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>
-                      </TableRow>
-                      <TableRow>
+                      </TableRow> */}
+                      {/* <TableRow>
                         <TableCell className="font-medium">C-1004</TableCell>
                         <TableCell>Emily Davis</TableCell>
                         <TableCell>207</TableCell>
@@ -367,7 +368,8 @@ export default function ComplaintsPage() {
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>
-                      </TableRow>
+                      </TableRow> */}
+                      <ComplaintsTable/>
                     </TableBody>
                   </Table>
                 </CardContent>
@@ -463,7 +465,7 @@ export default function ComplaintsPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableRow>
+                      {/* <TableRow>
                         <TableCell className="font-medium">C-1002</TableCell>
                         <TableCell>Sarah Johnson</TableCell>
                         <TableCell>105</TableCell>
@@ -480,7 +482,7 @@ export default function ComplaintsPage() {
                             Update
                           </Button>
                         </TableCell>
-                      </TableRow>
+                      </TableRow> */}
                     </TableBody>
                   </Table>
                 </CardContent>
@@ -502,7 +504,7 @@ export default function ComplaintsPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableRow>
+                      {/* <TableRow>
                         <TableCell className="font-medium">C-1004</TableCell>
                         <TableCell>Emily Davis</TableCell>
                         <TableCell>207</TableCell>
@@ -514,7 +516,7 @@ export default function ComplaintsPage() {
                             View Details
                           </Button>
                         </TableCell>
-                      </TableRow>
+                      </TableRow> */}
                     </TableBody>
                   </Table>
                 </CardContent>
