@@ -234,7 +234,7 @@ export default function ComplaintsPage() {
             <TabsContent value="all" className="mt-4">
               <Card>
                 <CardContent className="p-0">
-                  <Table>
+                  {/* <Table>
                     <TableHeader>
                       <TableRow>
                         <TableHead>ID</TableHead>
@@ -247,7 +247,7 @@ export default function ComplaintsPage() {
                         <TableHead className="text-right">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody> */}
                       {/* <TableRow>
                         <TableCell className="font-medium">C-1001</TableCell>
                         <TableCell>John Doe</TableCell>
@@ -370,8 +370,8 @@ export default function ComplaintsPage() {
                         </TableCell>
                       </TableRow> */}
                       <ComplaintsTable/>
-                    </TableBody>
-                  </Table>
+                    {/* </TableBody>
+                  </Table> */}
                 </CardContent>
               </Card>
             </TabsContent>

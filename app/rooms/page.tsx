@@ -40,28 +40,28 @@ export default function RoomsPage() {
                 Rooms
               </Link>
               <Link
-                href="#"
+                href="/billing"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
               >
                 <CreditCard className="h-5 w-5" />
                 Billing
               </Link>
               <Link
-                href="#"
+                href="/complaints"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
               >
                 <MessageSquare className="h-5 w-5" />
                 Complaints
               </Link>
               <Link
-                href="#"
+                href="/reports"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
               >
                 <FileText className="h-5 w-5" />
                 Reports
               </Link>
               <Link
-                href="#"
+                href="/settings"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
               >
                 <Settings className="h-5 w-5" />
@@ -107,28 +107,28 @@ export default function RoomsPage() {
               Rooms
             </Link>
             <Link
-              href="#"
+              href="/billing"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
             >
               <CreditCard className="h-5 w-5" />
               Billing
             </Link>
             <Link
-              href="#"
+              href="/complaints"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
             >
               <MessageSquare className="h-5 w-5" />
               Complaints
             </Link>
             <Link
-              href="#"
+              href="/reports"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
             >
               <FileText className="h-5 w-5" />
               Reports
             </Link>
             <Link
-              href="#"
+              href="/settings"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
             >
               <Settings className="h-5 w-5" />
