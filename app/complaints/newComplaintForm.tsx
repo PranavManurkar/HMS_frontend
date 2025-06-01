@@ -15,10 +15,11 @@ export function NewComplaintForm() {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await axios.post("/api/complaints/", {
-        student: Number(data.student),
-        complaint_text: data.complaint_text,
-        status: data.status || "Open",
+      const response = await axios.post("http://127.0.0.1:8000/api/complaints/", {
+          // Ensure the student email is used directly
+          student_email: data.student, // ✅ use email directly
+          complaint_text: data.complaint_text,
+          status: data.status || "Open",
       });
 
       toast.success("Complaint submitted!");
