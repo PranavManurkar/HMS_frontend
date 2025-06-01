@@ -18,7 +18,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -26,6 +26,9 @@ import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import ComplaintsTable from "./getComplaintsData"
+import { Label } from "@/components/ui/label"
+import { NewComplaintForm } from "./newComplaintForm"
+
 
 export default function ComplaintsPage() {
   return (
@@ -162,7 +165,45 @@ export default function ComplaintsPage() {
               <p className="text-muted-foreground">Manage student complaints and maintenance requests</p>
             </div>
             <div className="flex items-center gap-2">
-              <Button>New Complaint</Button>
+              {/* <Sheet>
+                <SheetTrigger asChild>
+                  <Button>New Complaint</Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[400px] sm:w-[500px]">
+                  <SheetHeader>
+                    <SheetTitle>Add New Complaint</SheetTitle>
+                  </SheetHeader>
+                  <form className="mt-6 flex flex-col gap-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="student-name">Student Name</Label>
+                      <Input id="student-name" placeholder="e.g., John Doe" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="room-number">Room Number</Label>
+                      <Input id="room-number" placeholder="e.g., 203" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="issue">Issue</Label>
+                      <Textarea id="issue" placeholder="Describe the complaint..." />
+                    </div> */}
+                    {/* <div className="grid gap-2">
+                      <Label htmlFor="priority">Priority</Label>
+                      <Select>
+                        <SelectTrigger id="priority">
+                          <SelectValue placeholder="Select priority" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="low">Low</SelectItem>
+                          <SelectItem value="medium">Medium</SelectItem>
+                          <SelectItem value="high">High</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div> */}
+                    {/* <Button type="submit" className="mt-4">Submit Complaint</Button>
+                  </form>
+                </SheetContent>
+              </Sheet> */}
+              <NewComplaintForm />
             </div>
           </div>
 
