@@ -154,61 +154,6 @@ export default function RoomsPage() {
               <Button>Add Room</Button>
             </div>
           </div>
-
-          {/* <Tabs defaultValue="all" className="mt-6">
-            <TabsList>
-              <TabsTrigger value="all">All Rooms</TabsTrigger>
-              <TabsTrigger value="occupied">Occupied</TabsTrigger>
-              <TabsTrigger value="vacant">Vacant</TabsTrigger>
-              <TabsTrigger value="maintenance">Maintenance</TabsTrigger>
-            </TabsList>
-            <TabsContent value="all" className="mt-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <RoomCard roomNumber="101" floor="1st Floor" capacity="2" occupants="2" status="occupied" />
-                <RoomCard roomNumber="102" floor="1st Floor" capacity="2" occupants="1" status="partially-occupied" />
-                <RoomCard roomNumber="103" floor="1st Floor" capacity="2" occupants="0" status="vacant" />
-                <RoomCard roomNumber="104" floor="1st Floor" capacity="3" occupants="3" status="occupied" />
-                <RoomCard
-                  roomNumber="105"
-                  floor="1st Floor"
-                  capacity="2"
-                  occupants="2"
-                  status="maintenance"
-                  maintenanceIssue="Leaking faucet"
-                />
-                <RoomCard roomNumber="201" floor="2nd Floor" capacity="2" occupants="2" status="occupied" />
-                <RoomCard roomNumber="202" floor="2nd Floor" capacity="2" occupants="0" status="vacant" />
-                <RoomCard roomNumber="203" floor="2nd Floor" capacity="1" occupants="1" status="occupied" />
-                <RoomCard roomNumber="301" floor="3rd Floor" capacity="3" occupants="2" status="partially-occupied" />
-              </div>
-            </TabsContent>
-            <TabsContent value="occupied" className="mt-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <RoomCard roomNumber="101" floor="1st Floor" capacity="2" occupants="2" status="occupied" />
-                <RoomCard roomNumber="104" floor="1st Floor" capacity="3" occupants="3" status="occupied" />
-                <RoomCard roomNumber="201" floor="2nd Floor" capacity="2" occupants="2" status="occupied" />
-                <RoomCard roomNumber="203" floor="2nd Floor" capacity="1" occupants="1" status="occupied" />
-              </div>
-            </TabsContent>
-            <TabsContent value="vacant" className="mt-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <RoomCard roomNumber="103" floor="1st Floor" capacity="2" occupants="0" status="vacant" />
-                <RoomCard roomNumber="202" floor="2nd Floor" capacity="2" occupants="0" status="vacant" />
-              </div>
-            </TabsContent>
-            <TabsContent value="maintenance" className="mt-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <RoomCard
-                  roomNumber="105"
-                  floor="1st Floor"
-                  capacity="2"
-                  occupants="2"
-                  status="maintenance"
-                  maintenanceIssue="Leaking faucet"
-                />
-              </div>
-            </TabsContent>
-          </Tabs> */}
           <RoomTabs />
         </main>
       </div>
