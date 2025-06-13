@@ -1,4 +1,3 @@
-// pages/register.tsx
 'use client'
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
@@ -12,7 +11,7 @@ export default function RegisterPage() {
     email: "",
     phone: "",
     password: "",
-    password2: "",
+    confirm_password: "", 
   })
   const [message, setMessage] = useState("")
 
@@ -24,7 +23,7 @@ export default function RegisterPage() {
     e.preventDefault()
     setMessage("")
 
-    if (form.password !== form.password2) {
+    if (form.password !== form.confirm_password) {
       setMessage("Passwords do not match")
       return
     }
@@ -38,6 +37,8 @@ export default function RegisterPage() {
           email: form.email,
           phone: form.phone,
           password: form.password,
+          confirm_password: form.confirm_password,
+          username: form.email,
         }),
       })
 
@@ -46,7 +47,10 @@ export default function RegisterPage() {
       if (res.ok) {
         setMessage("Registration successful! Please login.")
       } else {
-        setMessage(data.detail || "Registration failed")
+        const errors = Object.entries(data)
+          .map(([field, msgs]) => `${field}: ${(msgs as string[]).join(", ")}`)
+          .join(" | ")
+        setMessage(errors || "Registration failed")
       }
     } catch (err) {
       setMessage("Error: " + (err as Error).message)
@@ -98,9 +102,7 @@ export default function RegisterPage() {
             />
           </label>
           <label className="flex flex-col">
-            <span className="mb-1 flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              Password
-            </span>
+            <span className="mb-1 text-sm font-medium text-muted-foreground">Password</span>
             <Input
               type="password"
               name="password"
@@ -112,13 +114,11 @@ export default function RegisterPage() {
             />
           </label>
           <label className="flex flex-col">
-            <span className="mb-1 flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              Confirm Password
-            </span>
+            <span className="mb-1 text-sm font-medium text-muted-foreground">Confirm Password</span>
             <Input
               type="password"
-              name="password2"
-              value={form.password2}
+              name="confirm_password"
+              value={form.confirm_password}
               onChange={handleChange}
               placeholder="••••••••"
               required
