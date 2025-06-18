@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import {
   Building,
@@ -26,8 +28,45 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
+import { useEffect, useState } from "react"
+import { useRouter } from 'next/navigation' 
+import axios from 'axios'
+
+type Student = {
+  name: string
+  email: string
+  phone: string
+  room: string
+  title: string
+}
 
 export default function ProfilePage() {
+  const [student, setStudent] = useState<Student | null>(null)
+
+  useEffect(() => {
+    const fetchStudent = async () => {
+      try {
+        const email = localStorage.getItem('email');
+        const token = localStorage.getItem('token');
+        console.log('Fetching student with email:', email);
+        if (!email || !token) throw new Error("Missing email or token in localStorage");
+
+        const res = await axios.get(`http://127.0.0.1:8000/api/students/by_email/`, {
+          params: { email },
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        setStudent(res.data);
+      } catch (err) {
+        console.error('Error fetching student:', err);
+      }
+    };
+
+    fetchStudent();
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -232,6 +271,26 @@ export default function ProfilePage() {
                       <CardDescription>Update your personal details and contact information</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
+                          <div className="grid gap-4 md:grid-cols-2">
+                            <div className="grid gap-2">
+                              <Label htmlFor="name">Name</Label>
+                              <Input id="name" value={student?.name || ""} readOnly />
+                            </div>
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input id="email" type="email" value={student?.email || ""} readOnly />
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="phone">Phone</Label>
+                            <Input id="phone" type="tel" value={student?.phone || ""} readOnly />
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="job-title">Title</Label>
+                            <Input id="job-title" value={student?.title || ""} readOnly />
+                          </div>
+                        </CardContent>
+                    {/* <CardContent className="space-y-4">
                       <div className="grid gap-4 md:grid-cols-2">
                         <div className="grid gap-2">
                           <Label htmlFor="first-name">First Name</Label>
@@ -262,7 +321,7 @@ export default function ProfilePage() {
                           className="min-h-[100px]"
                         />
                       </div>
-                    </CardContent>
+                    </CardContent> */}
                     <CardFooter className="border-t p-6">
                       <Button>
                         <Save className="mr-2 h-4 w-4" />

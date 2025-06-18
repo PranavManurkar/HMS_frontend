@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { User, Lock } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" })
   const [message, setMessage] = useState("")
 
@@ -27,8 +29,15 @@ export default function LoginPage() {
       const data = await res.json()
 
       if (res.ok) {
-        setMessage("Login successful! Token: " + data.tokens.access)
-        // TODO: Save token, redirect etc.
+          setMessage("Login successful! Token: " + data.tokens.access);
+
+          // ✅ Save email and token in local storage
+          localStorage.setItem('email', form.email); // assuming API returns 'email'
+          localStorage.setItem('token', data.tokens);
+
+          console.log("Login successful:", form.email);
+          router.push('/');
+          // TODO: Redirect or other actions
       } else {
         setMessage(data.detail || "Login failed")
       }
