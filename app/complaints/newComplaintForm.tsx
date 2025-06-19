@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "sonner"; // or your preferred toast lib
-
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -12,12 +12,21 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 
 export function NewComplaintForm() {
   const { register, handleSubmit, reset, setValue } = useForm();
+  const [storedEmail, setStoredEmail] = useState("");
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    if (email) {
+      setStoredEmail(email);
+      setValue("student", email); // also set in form
+    }
+  }, [setValue]);
 
   const onSubmit = async (data: any) => {
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/complaints/", {
           // Ensure the student email is used directly
-          student_email: data.student, // ✅ use email directly
+          student_email: storedEmail, // ✅ use email directly
           complaint_text: data.complaint_text,
           status: data.status || "Open",
       });
@@ -37,8 +46,9 @@ export function NewComplaintForm() {
         <Input
           id="student"
           {...register("student", { required: true })}
-          placeholder="Enter student email"
+          placeholder={storedEmail || "Loading..."} // For user display
           type="email"
+          readOnly // ✅ non-editable
         />
       </div>
 
