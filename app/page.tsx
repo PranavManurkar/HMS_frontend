@@ -1,10 +1,29 @@
+'use client'
+
 import Link from "next/link"
 import { Building, CreditCard, FileText, Home, Menu, MessageSquare, Settings, User, Users, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 export default function Dashboard() {
+  const [rowCount, setRowCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchTableInfo = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/students/table_info/");
+        setRowCount(response.data.rows); // 👈 coming from DRF table_info
+      } catch (error) {
+        console.error("Error fetching table info:", error);
+      }
+    };
+
+    fetchTableInfo();
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -141,8 +160,9 @@ export default function Dashboard() {
                 <CardTitle className="text-sm font-medium">Total Students</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">245</div>
-                <p className="text-xs text-muted-foreground">+12 from last month</p>
+                <div className="text-2xl font-bold">
+                  {rowCount !== null ? rowCount : "Loading..."} {/* 👈 Handle loading */}
+                </div>
               </CardContent>
             </Card>
             <Card>
@@ -151,7 +171,6 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">87%</div>
-                <p className="text-xs text-muted-foreground">+2% from last month</p>
               </CardContent>
             </Card>
             <Card>
