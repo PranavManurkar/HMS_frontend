@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button"
 import { User, Lock } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from 'next/navigation';
+// In any component or utility
+import { ADMIN_EMAILS } from '@/lib/constants/admin';
+
 
 export default function LoginPage() {
   const router = useRouter();
@@ -27,14 +30,15 @@ export default function LoginPage() {
         body: JSON.stringify(form),
       })
       const data = await res.json()
-
+      
       if (res.ok) {
           setMessage("Login successful! Token: " + data.tokens.access);
-
+          // This returns true or false
           // ✅ Save email and token in local storage
           localStorage.setItem('email', form.email); // assuming API returns 'email'
           localStorage.setItem('token', data.tokens);
-
+          const isAdmin = ADMIN_EMAILS.has(form.email);
+          localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
           console.log("Login successful:", form.email);
           router.push('/');
           // TODO: Redirect or other actions

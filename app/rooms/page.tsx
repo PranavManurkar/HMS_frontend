@@ -1,14 +1,31 @@
+"use client";
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Building, CreditCard, FileText, Home, Menu, MessageSquare, Search, Settings, User, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import AddRoomForm from "./addRoomForm"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import RoomTabs from "./getRoomsData"
 
+
+
 export default function RoomsPage() {
+  const [isAdmin, setIsAdmin] = useState(true);
+  const [showForm, setShowForm] = useState(false)
+  const handleSuccess = () => {
+    setShowForm(false)
+    // Optionally: refresh room list here
+  }
+
+  // useEffect(() => {
+  //     const adminFlag = localStorage.getItem('isAdmin') === 'true';
+  //     setIsAdmin(adminFlag);
+  //   }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -151,7 +168,10 @@ export default function RoomsPage() {
                   className="w-full rounded-lg bg-background pl-8 md:w-[300px]"
                 />
               </div>
-              <Button>Add Room</Button>
+              <Button onClick={() => setShowForm(true)}>Add Room</Button>
+      {showForm && (
+        <AddRoomForm onSuccess={handleSuccess} onCancel={() => setShowForm(false)} />
+      )}
             </div>
           </div>
           <RoomTabs />
