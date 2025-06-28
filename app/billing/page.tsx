@@ -604,146 +604,274 @@ export default function BillingPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      {/* header, sidebar omitted */}
-      <main className="flex-1 p-4 md:p-6">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold">Billing & Payments</h1>
-          <p className="text-muted-foreground">Manage student payments and financial records</p>
+      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="shrink-0 md:hidden">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="flex flex-col">
+            <nav className="grid gap-2 text-lg font-medium">
+              <Link
+                href="/"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <Home className="h-5 w-5" />
+                Dashboard
+              </Link>
+              <Link
+                href="/students"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <Users className="h-5 w-5" />
+                Students
+              </Link>
+              <Link href="/rooms" className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-primary">
+                <Building className="h-5 w-5" />
+                Rooms
+              </Link>
+              <Link
+                href="/billing"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <CreditCard className="h-5 w-5" />
+                Billing
+              </Link>
+              <Link
+                href="/complaints"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <MessageSquare className="h-5 w-5" />
+                Complaints
+              </Link>
+              <Link
+                href="/reports"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <FileText className="h-5 w-5" />
+                Reports
+              </Link>
+              <Link
+                href="/settings"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <Settings className="h-5 w-5" />
+                Settings
+              </Link>
+            </nav>
+          </SheetContent>
+        </Sheet>
+        <div className="flex items-center gap-2">
+          <Building className="h-6 w-6" />
+          <span className="text-lg font-semibold">Hostel Manager</span>
         </div>
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {/* Total Revenue */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Total Revenue</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {usdFormatter.format(totalRevenue)}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Pending Payments */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Pending Payments</CardTitle>
-              <CardDescription>
-                {pendingInvoices.length} students with dues
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {usdFormatter.format(pendingAmount)}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Overdue Payments */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Overdue Payments</CardTitle>
-              <CardDescription>
-                {overdueInvoices.length} students with overdue
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {usdFormatter.format(overdueAmount)}
-              </div>
-            </CardContent>
-          </Card>
+        <div className="ml-auto flex items-center gap-4">
+          <Button variant="outline" size="sm" className="hidden md:flex">
+            <User className="mr-2 h-4 w-4" />
+            Profile
+          </Button>
+          <Button size="sm">
+            <Settings className="mr-2 h-4 w-4" />
+            Settings
+          </Button>
         </div>
-        <Tabs defaultValue="invoices" className="mt-6">
-          <TabsList>
-            <TabsTrigger value="invoices">Invoices</TabsTrigger>
-          </TabsList>
+      </header>
+      <div className="flex flex-1">
+        <aside className="hidden w-[250px] flex-col border-r bg-background md:flex">
+          <nav className="grid gap-2 p-4 text-sm">
+            <Link
+              href="/"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <Home className="h-5 w-5" />
+              Dashboard
+            </Link>
+            <Link
+              href="/students"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <Users className="h-5 w-5" />
+              Students
+            </Link>
+            <Link href="/rooms" className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-primary">
+              <Building className="h-5 w-5" />
+              Rooms
+            </Link>
+            <Link
+              href="/billing"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <CreditCard className="h-5 w-5" />
+              Billing
+            </Link>
+            <Link
+              href="/complaints"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <MessageSquare className="h-5 w-5" />
+              Complaints
+            </Link>
+            <Link
+              href="/reports"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <FileText className="h-5 w-5" />
+              Reports
+            </Link>
+            <Link
+              href="/settings"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+            >
+              <Settings className="h-5 w-5" />
+              Settings
+            </Link>
+          </nav>
+        </aside>
+        <div className="flex min-h-screen w-full flex-col bg-muted/40">
+          {/* header, sidebar omitted */}
+          <main className="flex-1 p-4 md:p-6">
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold">Billing & Payments</h1>
+              <p className="text-muted-foreground">Manage student payments and financial records</p>
+            </div>
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* Total Revenue */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Total Revenue</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">
+                    {usdFormatter.format(totalRevenue)}
+                  </div>
+                </CardContent>
+              </Card>
 
-          <TabsContent value="invoices" className="mt-4">
-            <Card>
-              <CardContent className="p-0">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Invoice #</TableHead>
-                      <TableHead>Student</TableHead>
-                      <TableHead>Room</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead>Due Date</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {loading ? (
-                      <TableRow>
-                        <TableCell colSpan={6}>Loading invoices…</TableCell>
-                      </TableRow>
-                    ) : invoices.length === 0 ? (
-                      <TableRow>
-                        <TableCell colSpan={6}>No invoices found.</TableCell>
-                      </TableRow>
-                    ) : (
-                      invoices.map(inv => (
-                        <TableRow key={inv.id}>
-                          <TableCell className="font-medium">{inv.invoice_number}</TableCell>
-                          <TableCell>{inv.student_name}</TableCell>
-                          <TableCell>{inv.room_number}</TableCell>
-                          <TableCell>${inv.amount}</TableCell>
-                          <TableCell>{new Date(inv.due_date).toLocaleDateString()}</TableCell>
-                          <TableCell>
-                            <Badge className={
-                              inv.status === 'Paid'
-                                ? 'bg-green-500'
-                                : inv.status === 'Pending'
-                                  ? 'bg-yellow-500'
-                                  : 'bg-red-500'
-                            }>
-                              {inv.status}
-                            </Badge>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </TabsContent>
+              {/* Pending Payments */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Pending Payments</CardTitle>
+                  <CardDescription>
+                    {pendingInvoices.length} students with dues
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">
+                    {usdFormatter.format(pendingAmount)}
+                  </div>
+                </CardContent>
+              </Card>
 
-          <TabsContent value="payments" className="mt-4">
-            <Card>
-              <CardContent className="p-0">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Payment ID</TableHead>
-                      <TableHead>Invoice #</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead>Payment Date</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {payments.length === 0 ? (
-                      <TableRow>
-                        <TableCell colSpan={4}>No payments found.</TableCell>
-                      </TableRow>
-                    ) : (
-                      payments.map(pay => (
-                        <TableRow key={pay.id}>
-                          <TableCell>{pay.id}</TableCell>
-                          <TableCell>{pay.invoice}</TableCell>
-                          <TableCell>${pay.amount_paid}</TableCell>
-                          <TableCell>{new Date(pay.paid_at).toLocaleString()}</TableCell>
+              {/* Overdue Payments */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Overdue Payments</CardTitle>
+                  <CardDescription>
+                    {overdueInvoices.length} students with overdue
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">
+                    {usdFormatter.format(overdueAmount)}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <Tabs defaultValue="invoices" className="mt-6">
+              <TabsList>
+                <TabsTrigger value="invoices">Invoices</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="invoices" className="mt-4">
+                <Card>
+                  <CardContent className="p-0">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Invoice #</TableHead>
+                          <TableHead>Student</TableHead>
+                          <TableHead>Room</TableHead>
+                          <TableHead>Amount</TableHead>
+                          <TableHead>Due Date</TableHead>
+                          <TableHead>Status</TableHead>
                         </TableRow>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </main>
-    </div>
+                      </TableHeader>
+                      <TableBody>
+                        {loading ? (
+                          <TableRow>
+                            <TableCell colSpan={6}>Loading invoices…</TableCell>
+                          </TableRow>
+                        ) : invoices.length === 0 ? (
+                          <TableRow>
+                            <TableCell colSpan={6}>No invoices found.</TableCell>
+                          </TableRow>
+                        ) : (
+                          invoices.map(inv => (
+                            <TableRow key={inv.id}>
+                              <TableCell className="font-medium">{inv.invoice_number}</TableCell>
+                              <TableCell>{inv.student_name}</TableCell>
+                              <TableCell>{inv.room_number}</TableCell>
+                              <TableCell>${inv.amount}</TableCell>
+                              <TableCell>{new Date(inv.due_date).toLocaleDateString()}</TableCell>
+                              <TableCell>
+                                <Badge className={
+                                  inv.status === 'Paid'
+                                    ? 'bg-green-500'
+                                    : inv.status === 'Pending'
+                                      ? 'bg-yellow-500'
+                                      : 'bg-red-500'
+                                }>
+                                  {inv.status}
+                                </Badge>
+                              </TableCell>
+                            </TableRow>
+                          ))
+                        )}
+                      </TableBody>
+                    </Table>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="payments" className="mt-4">
+                <Card>
+                  <CardContent className="p-0">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Payment ID</TableHead>
+                          <TableHead>Invoice #</TableHead>
+                          <TableHead>Amount</TableHead>
+                          <TableHead>Payment Date</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {payments.length === 0 ? (
+                          <TableRow>
+                            <TableCell colSpan={4}>No payments found.</TableCell>
+                          </TableRow>
+                        ) : (
+                          payments.map(pay => (
+                            <TableRow key={pay.id}>
+                              <TableCell>{pay.id}</TableCell>
+                              <TableCell>{pay.invoice}</TableCell>
+                              <TableCell>${pay.amount_paid}</TableCell>
+                              <TableCell>{new Date(pay.paid_at).toLocaleString()}</TableCell>
+                            </TableRow>
+                          ))
+                        )}
+                      </TableBody>
+                    </Table>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </main>
+        </div>
+      </div>
+      </div>
   )
 }
 
