@@ -505,6 +505,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { CardDescription } from '@/components/ui/card'
 import {
   Building,
   CreditCard,
@@ -547,10 +548,22 @@ type Payment = {
 }
 
 export default function BillingPage() {
+  const usdFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  })
   const [invoices, setInvoices] = useState<Billing[]>([])
   const [payments, setPayments] = useState<Payment[]>([])
   const [loading, setLoading] = useState(true)
+  const paidInvoices = invoices.filter(inv => inv.status === 'Paid')
+  const pendingInvoices = invoices.filter(inv => inv.status === 'Pending')
+  const overdueInvoices = invoices.filter(inv => inv.status === 'Overdue')
 
+  // 2. Sum amounts in each group:
+  const totalRevenue = paidInvoices.reduce((sum, inv) => sum + inv.amount, 0)
+  const pendingAmount = pendingInvoices.reduce((sum, inv) => sum + inv.amount, 0)
+  const overdueAmount = overdueInvoices.reduce((sum, inv) => sum + inv.amount, 0)
   useEffect(() => {
     fetchInvoices()
     fetchPayments()
@@ -562,7 +575,15 @@ export default function BillingPage() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/billings/`, { cache: 'no-store' })
       if (!res.ok) throw new Error(`Status ${res.status}`)
       const data: Billing[] = await res.json()
-      setInvoices(data)
+
+      // force numeric amounts here:
+      const normalized = data.map(inv => ({
+        ...inv,
+        amount: Number(inv.amount),           // <-- coerce string to number
+        // if inv.amount can be null/undefined, you could do:
+        // amount: Number(inv.amount) || 0
+      }))
+      setInvoices(normalized)
     } catch (err) {
       console.error('fetchInvoices error:', err)
     } finally {
@@ -589,12 +610,52 @@ export default function BillingPage() {
           <h1 className="text-3xl font-bold">Billing & Payments</h1>
           <p className="text-muted-foreground">Manage student payments and financial records</p>
         </div>
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* Total Revenue */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Total Revenue</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {usdFormatter.format(totalRevenue)}
+              </div>
+            </CardContent>
+          </Card>
 
+          {/* Pending Payments */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Pending Payments</CardTitle>
+              <CardDescription>
+                {pendingInvoices.length} students with dues
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {usdFormatter.format(pendingAmount)}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Overdue Payments */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Overdue Payments</CardTitle>
+              <CardDescription>
+                {overdueInvoices.length} students with overdue
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {usdFormatter.format(overdueAmount)}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
         <Tabs defaultValue="invoices" className="mt-6">
           <TabsList>
             <TabsTrigger value="invoices">Invoices</TabsTrigger>
-            <TabsTrigger value="payments">Payments</TabsTrigger>
-            <TabsTrigger value="history">Payment History</TabsTrigger>
           </TabsList>
 
           <TabsContent value="invoices" className="mt-4">
@@ -633,8 +694,8 @@ export default function BillingPage() {
                               inv.status === 'Paid'
                                 ? 'bg-green-500'
                                 : inv.status === 'Pending'
-                                ? 'bg-yellow-500'
-                                : 'bg-red-500'
+                                  ? 'bg-yellow-500'
+                                  : 'bg-red-500'
                             }>
                               {inv.status}
                             </Badge>
@@ -680,8 +741,6 @@ export default function BillingPage() {
               </CardContent>
             </Card>
           </TabsContent>
-
-          {/* Payment History could reuse / combine data */}
         </Tabs>
       </main>
     </div>
