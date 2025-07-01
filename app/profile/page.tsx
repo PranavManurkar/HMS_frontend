@@ -67,6 +67,13 @@ export default function ProfilePage() {
     fetchStudent();
   }, []);
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const adminFlag = localStorage.getItem('isAdmin') === 'true';
+    setIsAdmin(adminFlag);
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -147,22 +154,19 @@ export default function ProfilePage() {
         </div>
       </header>
       <div className="flex flex-1">
-        <aside className="hidden w-[250px] flex-col border-r bg-background md:flex">
+<aside className="hidden w-[250px] flex-col border-r bg-background md:flex">
           <nav className="grid gap-2 p-4 text-sm">
-            <Link
-              href="/"
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
-            >
+            <Link href="/" className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary">
               <Home className="h-5 w-5" />
               Dashboard
             </Link>
-            <Link
+            {/* <Link
               href="/students"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
             >
               <Users className="h-5 w-5" />
               Students
-            </Link>
+            </Link> */}
             <Link
               href="/rooms"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
@@ -170,13 +174,13 @@ export default function ProfilePage() {
               <Building className="h-5 w-5" />
               Rooms
             </Link>
-            <Link
+            {/* <Link
               href="/billing"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
             >
               <CreditCard className="h-5 w-5" />
               Billing
-            </Link>
+            </Link> */}
             <Link
               href="/complaints"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
@@ -184,7 +188,7 @@ export default function ProfilePage() {
               <MessageSquare className="h-5 w-5" />
               Complaints
             </Link>
-            <Link
+            {/* <Link
               href="/reports"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
             >
@@ -197,7 +201,27 @@ export default function ProfilePage() {
             >
               <Settings className="h-5 w-5" />
               Settings
-            </Link>
+            </Link> */}
+            {isAdmin && (
+              <>
+                <Link href="/students" className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary">
+                  <Users className="h-5 w-5" />
+                  Students
+                </Link>
+                <Link href="/billing" className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary">
+                  <CreditCard className="h-5 w-5" />
+                  Billing
+                </Link>
+                <Link href="/complaints" className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary">
+                  <MessageSquare className="h-5 w-5" />
+                  Complaints
+                </Link>
+                <Link href="/settings" className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary">
+                  <Settings className="h-5 w-5" />
+                  Settings
+                </Link>
+              </>
+            )}
           </nav>
         </aside>
         <main className="flex-1 p-4 md:p-6">

@@ -54,7 +54,7 @@ export default function Dashboard() {
       <div className="flex flex-1">
         <aside className="hidden w-[250px] flex-col border-r bg-background md:flex">
           <nav className="grid gap-2 p-4 text-sm">
-            <Link href="#" className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-primary">
+            <Link href="/" className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary">
               <Home className="h-5 w-5" />
               Dashboard
             </Link>
