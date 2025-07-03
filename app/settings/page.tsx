@@ -67,13 +67,13 @@ export default function SettingsPage() {
                 <MessageSquare className="h-5 w-5" />
                 Complaints
               </Link>
-              <Link
+              {/* <Link
                 href="/reports"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
               >
                 <FileText className="h-5 w-5" />
                 Reports
-              </Link>
+              </Link> */}
               <Link href="/settings" className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-primary">
                 <Settings className="h-5 w-5" />
                 Settings
